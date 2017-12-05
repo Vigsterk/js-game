@@ -105,7 +105,7 @@ class Level {
     if (pos.x < 0 || (pos.x + size.x >= this.width) || pos.y < 0 )  {
       return 'wall';
     }
-				else if (pos.y + size.y >= this.height) {
+    else if (pos.y + size.y >= this.height) {
       return 'lava';
     }
 
@@ -177,7 +177,7 @@ class LevelParser {
     if (symbol === "x") {
       return "wall";
     }
-				else if (symbol === "!") {
+    else if (symbol === "!") {
       return "lava";
     }
   }
@@ -326,8 +326,8 @@ const actorDict = {
 const parser = new LevelParser(actorDict);
 
 loadLevels().then(levelsStr => {
-	let levels = JSON.parse(levelsStr);
+    let levels = JSON.parse(levelsStr);
   return runGame(levels, parser, DOMDisplay);
 }).then(() => {
-	alert('Вы выиграли!')
+    alert('Вы выиграли!')
 });
