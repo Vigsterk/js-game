@@ -1,9 +1,9 @@
 'use strict';
 
 class Vector {
-		constructor(x = 0, y = 0) {
-			 this.x = x;
-			 this.y = y;
+    constructor(x = 0, y = 0) {
+      this.x = x;
+      this.y = y;
 }
 		
   plus(vector) {
@@ -63,13 +63,13 @@ class Actor {
 
   isIntersect(actor) {
     if (actor instanceof Actor) {
-    	 if (this === actor) return false;
-    	 let horizontal = actor.left === this.left && actor.right === this.right,
+      if (this === actor) return false;
+      let horizontal = actor.left === this.left && actor.right === this.right,
           vertical = actor.top === this.top && actor.bottom === this.bottom,
           axisX = (actor.left < this.left && this.left < actor.right) || (this.left < actor.left && actor.left < this.right),
           axisY = (actor.top < this.top && this.top < actor.bottom) || (this.top < actor.top && actor.top < this.bottom);
     return (axisX && axisY) || (axisX && vertical) || (axisY && horizontal) || (horizontal && vertical);
-  }
+    }
     else {
       throw Error("Необходим объект типа Actor");
     }
@@ -85,7 +85,7 @@ class Level {
     this.width = grid.reduce((cell, row) => row.length > cell ? row.length : cell, 0);
     this.status = null;
     this.finishDelay = 1;
-		}
+  }
 
   isFinished() {
     return (this.status !== null && this.finishDelay < 0);
@@ -109,24 +109,24 @@ class Level {
       return 'lava';
     }
 
-		  let verticalStart = Math.floor(pos.y),
+    let verticalStart = Math.floor(pos.y),
         verticalEnd = Math.ceil(pos.y + size.y),
         horizontalStart = Math.floor(pos.x),
         horizontalEnd = Math.ceil(pos.x + size.x);
 
     for (let verticalValue = verticalStart; verticalValue < verticalEnd; verticalValue++) {
       for (let horizontalValue = horizontalStart; horizontalValue < horizontalEnd; horizontalValue++) {
-        let vertDirection = this.grid[verticalValue];
-        if (vertDirection) {
-          let horzntDirection = vertDirection[horizontalValue];
-          if (horzntDirection) {
-								    return horzntDirection;
-								  }
+            let vertDirection = this.grid[verticalValue];
+            if (vertDirection) {
+              let horzntDirection = vertDirection[horizontalValue];
+              if (horzntDirection) {
+              return horzntDirection;
+          }
         }
       } 
     }
   return undefined;
-		}
+  }
 
   removeActor(actor) {
     let indexActor = this.actors.indexOf(actor);
@@ -148,7 +148,7 @@ class Level {
   playerTouched(type, actor) {
     if (this.status !== null) {
       return;
-				}
+    }
     if (type === 'lava' || type === 'fireball') {
       this.status ='lost';
     }
@@ -185,13 +185,13 @@ class LevelParser {
   createGrid(stringsArr) {
     if (stringsArr.length < 1){
       return [];
-		  }
+    }
     let grid = [], row;
     for (let string of stringsArr) {
       row = [];
       for (let key of string) {
         row.push(this.obstacleFromSymbol(key));
-				  }
+      }
       grid.push(row);
     }
     return grid;
@@ -208,10 +208,10 @@ class LevelParser {
           func = this.actorFromSymbol(char);
           actor = new func(new Vector(z, i));
           if (actor instanceof Actor) {
-								    actors.push(actor);
-						    }
+            actors.push(actor);
+          }
         }
-				  catch (exception) {}
+        catch (exception) {}
       }
     }
   return actors;
@@ -243,10 +243,10 @@ class Fireball extends Actor {
     let nextPosition = this.getNextPosition(time);
     if (level.obstacleAt(nextPosition, this.size)) {
       this.handleObstacle();
-				}
+    }
     else {
       this.pos = nextPosition;
-				}
+    }
   }
 }
 
@@ -285,7 +285,7 @@ class Coin extends Actor {
 
   get type() {
     return 'coin';
-}
+  }
 
   updateSpring(time = 1) {
     this.spring = this.spring + this.springSpeed * time;
