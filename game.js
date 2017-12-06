@@ -63,12 +63,14 @@ class Actor {
 
   isIntersect(actor) {
     if (actor instanceof Actor) {
-      if (this === actor) return false;
+      if (this === actor){
+        return false;
+      }
       const horizontal = actor.left === this.left && actor.right === this.right;
       const vertical = actor.top === this.top && actor.bottom === this.bottom;
       const axisX = (actor.left < this.left && this.left < actor.right) || (this.left < actor.left && actor.left < this.right);
       const axisY = (actor.top < this.top && this.top < actor.bottom) || (this.top < actor.top && actor.top < this.bottom);
-    return (axisX && axisY) || (axisX && vertical) || (axisY && horizontal) || (horizontal && vertical);
+      return (axisX && axisY) || (axisX && vertical) || (axisY && horizontal) || (horizontal && vertical);
     }
     else {
       throw Error("Необходим объект типа Actor");
@@ -118,7 +120,7 @@ class Level {
             if (vertDirection) {
               const horzntDirection = vertDirection[horizontalValue];
               if (horzntDirection) {
-              return horzntDirection;
+                return horzntDirection;
           }
         }
       } 
@@ -187,7 +189,7 @@ class LevelParser {
     const grid = [];
     for (let string of stringsArr) {
       const row = [];
-      for (let key of string) {
+    for (let key of string) {
         row.push(this.obstacleFromSymbol(key));
       }
       grid.push(row);
