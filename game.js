@@ -64,10 +64,10 @@ class Actor {
   isIntersect(actor) {
     if (actor instanceof Actor) {
       if (this === actor) return false;
-      let horizontal = actor.left === this.left && actor.right === this.right,
-          vertical = actor.top === this.top && actor.bottom === this.bottom,
-          axisX = (actor.left < this.left && this.left < actor.right) || (this.left < actor.left && actor.left < this.right),
-          axisY = (actor.top < this.top && this.top < actor.bottom) || (this.top < actor.top && actor.top < this.bottom);
+      const horizontal = actor.left === this.left && actor.right === this.right;
+      const vertical = actor.top === this.top && actor.bottom === this.bottom;
+      const axisX = (actor.left < this.left && this.left < actor.right) || (this.left < actor.left && actor.left < this.right);
+      const axisY = (actor.top < this.top && this.top < actor.bottom) || (this.top < actor.top && actor.top < this.bottom);
     return (axisX && axisY) || (axisX && vertical) || (axisY && horizontal) || (horizontal && vertical);
     }
     else {
@@ -108,17 +108,15 @@ class Level {
     else if (pos.y + size.y >= this.height) {
       return 'lava';
     }
-
-    let verticalStart = Math.floor(pos.y),
-        verticalEnd = Math.ceil(pos.y + size.y),
-        horizontalStart = Math.floor(pos.x),
-        horizontalEnd = Math.ceil(pos.x + size.x);
-
+    const verticalStart = Math.floor(pos.y);
+    const verticalEnd = Math.ceil(pos.y + size.y);
+    const horizontalStart = Math.floor(pos.x);
+    const horizontalEnd = Math.ceil(pos.x + size.x);
     for (let verticalValue = verticalStart; verticalValue < verticalEnd; verticalValue++) {
       for (let horizontalValue = horizontalStart; horizontalValue < horizontalEnd; horizontalValue++) {
-            let vertDirection = this.grid[verticalValue];
+            const vertDirection = this.grid[verticalValue];
             if (vertDirection) {
-              let horzntDirection = vertDirection[horizontalValue];
+              const horzntDirection = vertDirection[horizontalValue];
               if (horzntDirection) {
               return horzntDirection;
           }
@@ -129,20 +127,20 @@ class Level {
   }
 
   removeActor(actor) {
-    let indexActor = this.actors.indexOf(actor);
+    const indexActor = this.actors.indexOf(actor);
     if (indexActor > -1) {
       this.actors.splice(indexActor, 1);
     }
   }
 
   noMoreActors(type) {
-    let actors = [];
+    const noActors = [];
     this.actors.forEach(actor => {
       if (actor.type === type) {
-        actors.push(actor);
+        noActors.push(actor);
       }
-    })
-   return actors.length === 0;
+    });
+   return noActors.length === 0;
   }
 
   playerTouched(type, actor) {
@@ -186,9 +184,9 @@ class LevelParser {
     if (stringsArr.length < 1){
       return [];
     }
-    let grid = [], row;
+    const grid = [];
     for (let string of stringsArr) {
-      row = [];
+      const row = [];
       for (let key of string) {
         row.push(this.obstacleFromSymbol(key));
       }
@@ -198,15 +196,13 @@ class LevelParser {
   }
 
   createActors(stringsArr) {
-    let actor,
-        actors = [],
-        func;   
+    const actors = [];
     for (let i = 0; i < stringsArr.length; i++) {
       for (let z = 0; z < stringsArr[i].length; z++) {
-        let char = stringsArr[i][z];
+        const char = stringsArr[i][z];
         try {
-          func = this.actorFromSymbol(char);
-          actor = new func(new Vector(z, i));
+          const func = this.actorFromSymbol(char);
+          const actor = new func(new Vector(z, i));
           if (actor instanceof Actor) {
             actors.push(actor);
           }
@@ -240,7 +236,7 @@ class Fireball extends Actor {
   }
 
   act(time, level) {
-    let nextPosition = this.getNextPosition(time);
+    const nextPosition = this.getNextPosition(time);
     if (level.obstacleAt(nextPosition, this.size)) {
       this.handleObstacle();
     }
@@ -264,8 +260,8 @@ class VerticalFireball extends Fireball {
 
 class FireRain extends Fireball {
   constructor(pos) {
-    let speed = new Vector(0,3);
-    super(pos, speed);
+    const fireRainSpeed = new Vector(0,3);
+    super(pos, fireRainSpeed);
     this.startPos = pos;
   }
 
@@ -326,8 +322,8 @@ const actorDict = {
 const parser = new LevelParser(actorDict);
 
 loadLevels().then(levelsStr => {
-    let levels = JSON.parse(levelsStr);
+  const levels = JSON.parse(levelsStr);
   return runGame(levels, parser, DOMDisplay);
 }).then(() => {
-    alert('Вы выиграли!')
+  alert('Вы выиграли!');
 });
