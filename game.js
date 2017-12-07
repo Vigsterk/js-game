@@ -1,9 +1,9 @@
 'use strict';
 
 class Vector {
-    constructor(x = 0, y = 0) {
-      this.x = x;
-      this.y = y;
+  constructor(x = 0, y = 0) {
+    this.x = x;
+    this.y = y;
 }
 		
   plus(vector) {
@@ -38,9 +38,9 @@ class Actor {
     if (!(speed instanceof Vector)) {
       throw Error('speed не является объектом типа Vector');
     }
-  this.pos = pos;
-  this.size = size;
-  this.speed = speed;
+    this.pos = pos;
+    this.size = size;
+    this.speed = speed;
   }
 
   act() {}
@@ -104,7 +104,7 @@ class Level {
     if (!(pos instanceof Vector) || !(size instanceof Vector)) {
       throw new Error("Необходим объект типа Vector");
     }
-    if (pos.x < 0 || (pos.x + size.x >= this.width) || pos.y < 0 )  {
+    if (pos.x < 0 || (pos.x + size.x >= this.width) || pos.y < 0 ) {
       return 'wall';
     }
     else if (pos.y + size.y >= this.height) {
@@ -190,7 +190,7 @@ class LevelParser {
     for (let string of stringsArr) {
       const row = [];
     for (let key of string) {
-        row.push(this.obstacleFromSymbol(key));
+      row.push(this.obstacleFromSymbol(key));
       }
       grid.push(row);
     }
