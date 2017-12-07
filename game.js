@@ -116,11 +116,11 @@ class Level {
     const horizontalEnd = Math.ceil(pos.x + size.x);
     for (let verticalValue = verticalStart; verticalValue < verticalEnd; verticalValue++) {
       for (let horizontalValue = horizontalStart; horizontalValue < horizontalEnd; horizontalValue++) {
-            const vertDirection = this.grid[verticalValue];
-            if (vertDirection) {
-              const horzntDirection = vertDirection[horizontalValue];
-              if (horzntDirection) {
-                return horzntDirection;
+        const vertDirection = this.grid[verticalValue];
+        if (vertDirection) {
+          const horzntDirection = vertDirection[horizontalValue];
+          if (horzntDirection) {
+            return horzntDirection;
           }
         }
       } 
