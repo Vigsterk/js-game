@@ -73,7 +73,7 @@ class Actor {
       return (axisX && axisY) || (axisX && vertical) || (axisY && horizontal) || (horizontal && vertical);
     }
     else {
-      throw Error("Необходим объект типа Actor");
+	    throw Error("Необходим объект типа Actor");
     }
   }
 }
