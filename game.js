@@ -339,8 +339,5 @@ loadLevels().then(levelsStr = > {
 return runGame(levels, parser, DOMDisplay);
 }).
 then(() = > {
-    alert('Вы выиграли!'
-)
-;
-})
-;
+    alert('Вы выиграли!');
+});
