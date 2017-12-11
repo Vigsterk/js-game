@@ -163,13 +163,13 @@ class LevelParser {
         const func = this.actorFromSymbol(char);
         if (typeof func === 'function') {
           const actor = new func(new Vector(z, i));
-          if ( actor instanceof Actor) {
+          if (actor instanceof Actor) {
             actors.push(actor);
           }
         }
       });
       return actors;
-    },[]);
+    }, []);
   }
 
   parse(stringsArr) {
