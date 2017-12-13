@@ -145,7 +145,7 @@ class LevelParser {
     return this.dictionary[symbol];
   }
 
-  static obstacleFromSymbol(symbol) {
+  obstacleFromSymbol(symbol) {
     if (symbol === "x") {
       return "wall";
     }
@@ -154,8 +154,8 @@ class LevelParser {
     }
   }
 
-  static createGrid(symbol = []) {
-    return symbol.map(row => row.split('').map(item => LevelParser.obstacleFromSymbol(item)));
+  createGrid(symbol = []) {
+    return symbol.map(row => row.split('').map(item => this.obstacleFromSymbol(item)));
   }
 
   createActors(stringsArr = []) {
@@ -174,7 +174,7 @@ class LevelParser {
   }
 
   parse(stringsArr) {
-    return new Level(LevelParser.createGrid(stringsArr), this.createActors(stringsArr));
+    return new Level(this.createGrid(stringsArr), this.createActors(stringsArr));
   }
 }
 
