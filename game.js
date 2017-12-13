@@ -1,3 +1,4 @@
+
 'use strict';
 
 class Vector {
@@ -153,8 +154,8 @@ class LevelParser {
     }
   }
 
-  static createGrid(plan = []) {
-    return plan.map(row => row.split('').map(item => this.obstacleFromSymbol(item)));
+  static createGrid(symbol = []) {
+    return symbol.map(row => row.split('').map(item => LevelParser.obstacleFromSymbol(item)));
   }
 
   createActors(stringsArr = []) {
