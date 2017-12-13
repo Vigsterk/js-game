@@ -146,11 +146,11 @@ class LevelParser {
   }
 
   obstacleFromSymbol(symbol) {
-    if (symbol === "x") {
-      return "wall";
+    if (symbol === 'x') {
+      return 'wall';
     }
-    if (symbol === "!") {
-      return "lava";
+    if (symbol === '!') {
+      return 'lava';
     }
   }
 
